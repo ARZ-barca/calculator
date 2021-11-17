@@ -108,6 +108,8 @@ function updateDisplayFunction(event) {
         display.textContent = displayValue;
         return;
     } else if (text[2] === '') {
+        displayValue = displayValue.slice(0, -3) + ` ${operator} `;
+        display.textContent = displayValue;
         return;
     } else if (text[2] !== '') {
         displayValue = operate(text[0], text[2], text[1]) + ` ${operator} `;
@@ -119,10 +121,8 @@ function updateDisplayFunction(event) {
 //evaluate button
 const equalButton = document.querySelector('.button-equal')
 equalButton.addEventListener('click', operation)
-console.log(equalButton)
-console.log(functionButtons)
+
 function operation(event) {
-    console.log(equalButton)
     text = displayValue.split(' ')
     if (text[0] === '') {
         return;
@@ -141,10 +141,23 @@ function operation(event) {
 
 // '.' button
 
+const decimalButton = document.querySelector('.button-decimal')
+decimalButton.addEventListener('click', addDecimal)
 
-
-
-
+function addDecimal(event) {
+    let text = displayValue.split(' ')
+    if (text.length === 1 && !text[0].includes('.') && text[0] !== '') {
+        displayValue += this.textContent; 
+        display.textContent = displayValue;
+        return;
+    } else if (text.length === 3 && !text[2].includes('.')) {
+        displayValue += this.textContent;
+        display.textContent = displayValue;
+        return ;
+    } else {
+        return;
+    }
+}
 
 
 
