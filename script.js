@@ -1,9 +1,12 @@
 //basic functions
+
+const DECIMAL_POINTS = 6
+
 function add(a, b) {
     let result = String(+a + +b);
     if (result.includes('.')) {
-        if (result.split('.')[1].length > 3) {
-            result = String(Number(result).toFixed(3))
+        if (result.split('.')[1].length > DECIMAL_POINTS) {
+            result = String(Number(result).toFixed(DECIMAL_POINTS))
         }
     }
     return result;
@@ -12,8 +15,8 @@ function add(a, b) {
 function subtract(a, b) {
     let result = String(a - b);
     if (result.includes('.')) {
-        if (result.split('.')[1].length > 3) {
-            result = String(Number(result).toFixed(3))
+        if (result.split('.')[1].length > DECIMAL_POINTS) {
+            result = String(Number(result).toFixed(DECIMAL_POINTS))
         }
     }
     return result;
@@ -22,8 +25,8 @@ function subtract(a, b) {
 function multiply(a, b) {
     let result = String(a * b);
     if (result.includes('.')) {
-        if (result.split('.')[1].length > 3) {
-            result = String(Number(result).toFixed(3))
+        if (result.split('.')[1].length > DECIMAL_POINTS) {
+            result = String(Number(result).toFixed(DECIMAL_POINTS))
         }
     }
     return result;
@@ -32,8 +35,8 @@ function multiply(a, b) {
 function devide(a, b) {
     let result = String(a / b);
     if (result.includes('.')) {
-        if (result.split('.')[1].length > 3) {
-            result = String(Number(result).toFixed(3))
+        if (result.split('.')[1].length > DECIMAL_POINTS) {
+            result = String(Number(result).toFixed(DECIMAL_POINTS))
         }
     }
     return result;
@@ -59,6 +62,7 @@ let displayValue = '';
 const display = document.querySelector('.display');
 
 //adding the numbers
+
 const numberButtons = document.querySelectorAll('.button-number');
 numberButtons.forEach(button => button.addEventListener('click', updateDisplayNumber));
 
@@ -68,6 +72,7 @@ function updateDisplayNumber(event) {
 }
 
 //making clear and delete functionality
+
 const deleteButton = document.querySelector('.button-delete')
 const clearButton = document.querySelector('.button-clear')
 
@@ -119,6 +124,7 @@ function updateDisplayFunction(event) {
 }
 
 //evaluate button
+
 const equalButton = document.querySelector('.button-equal')
 equalButton.addEventListener('click', operation)
 
@@ -147,11 +153,11 @@ decimalButton.addEventListener('click', addDecimal)
 function addDecimal(event) {
     let text = displayValue.split(' ')
     if (text.length === 1 && !text[0].includes('.') && text[0] !== '') {
-        displayValue += this.textContent; 
+        displayValue += '.'; 
         display.textContent = displayValue;
         return;
     } else if (text.length === 3 && !text[2].includes('.')) {
-        displayValue += this.textContent;
+        displayValue += '.';
         display.textContent = displayValue;
         return ;
     } else {
@@ -159,11 +165,78 @@ function addDecimal(event) {
     }
 }
 
+/*
+    keyboard events
+*/
 
+window.addEventListener('keydown', keyboardInputOperation)
 
+function keyboardInputOperation(event) {
+    let keyDiv = document.querySelector(`div[data-key="${event.key}"]`)
+    //console.log(event)
+    if (!keyDiv) return;
+    
 
+    /*
+        number buttons
+    */
 
+    if (!isNaN(Number(event.key))) {
+        displayValue += event.key;
+        display.textContent = displayValue;
+    }
 
+    /*
+        delete button
+    */
+
+    if (event.key === 'Backspace') {
+        deleteDisplay()
+    }
+
+    /*
+        function buttons
+    */
+
+    if ("+-/*".includes(event.key)) {
+        let text = displayValue.split(' ');
+        let operator = event.key;
+        if (operator === "/") {
+            operator = '÷'
+        }
+        if (text[0] === '') {
+            //return;
+        } else if (text.length === 1) {
+            displayValue += ` ${operator} `;
+            display.textContent = displayValue;
+            //return;
+        } else if (text[2] === '') {
+            displayValue = displayValue.slice(0, -3) + ` ${operator} `;
+            display.textContent = displayValue;
+            //return;
+        } else if (text[2] !== '') {
+            displayValue = operate(text[0], text[2], text[1]) + ` ${operator} `;
+            display.textContent = displayValue;
+            //return;
+        }
+    }
+
+    /*
+        decimal button
+    */
+    
+    if (event.key === '.') {
+        addDecimal()
+    }
+
+    /*
+        enter button
+    */
+
+    if (event.key === 'Enter') {
+        operation()
+    }
+}
 
 
 
