@@ -49,8 +49,8 @@ html {
 
 #calculator {
   background-color: var(--calculator-bg-color);
-  width: min(700px, 100%);
-  height: min(1000px, 100vh - var(--page-margin) * 2);
+  width: min(500px, 100%);
+  height: min(700px, 100vh - var(--page-margin) * 2);
   border: 5px solid rgb(149, 150, 156);
   border-radius: 10px;
   display: grid;
@@ -129,7 +129,7 @@ footer {
   display: none;
 }
 
-@media (min-height: 1200px) {
+@media (min-height: 900px) {
   footer {
     display: flex;
     position: absolute;
