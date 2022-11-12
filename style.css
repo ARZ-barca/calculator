@@ -2,7 +2,9 @@
     reset
 */
 
-* , *::after, *::before {
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -14,13 +16,13 @@
 
 :root {
   --page-margin: 15px;
-  --calculator-bg-color: #D1D5DB;
+  --calculator-bg-color: #d1d5db;
   --num-button-bg-color: #7787a8;
-  --display-screen-bg-color: #9CA3AF;
-  --func-button-bg-color: #FCD34D;
+  --display-screen-bg-color: #9ca3af;
+  --func-button-bg-color: #fcd34d;
   --font-color: #111827;
-  --clear-delete-bg-color: #F87171;
-  --equal-bg-color: #34D399;
+  --clear-delete-bg-color: #f87171;
+  --equal-bg-color: #34d399;
   --decimal-bg-color: #77b6ac;
 }
 
@@ -29,9 +31,9 @@
 */
 
 html {
-  font-size: 30px;
+  font-size: 25px;
   color: var(--font-color);
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
 /*
@@ -49,13 +51,13 @@ html {
 
 #calculator {
   background-color: var(--calculator-bg-color);
-  width: min(500px, 100%);
-  height: min(700px, 100vh - var(--page-margin) * 2);
+  width: min(350px, 100%);
+  height: min(500px, 100vh - var(--page-margin) * 2);
   border: 5px solid rgb(149, 150, 156);
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 120px repeat(5, 1fr);
+  grid-template-rows: 100px repeat(5, 1fr);
   padding: 15px;
   gap: 15px;
   box-shadow: 0 0 10px;
@@ -93,16 +95,15 @@ html {
   grid-row: 2 / 3;
 }
 
-
 .button-clear {
   font-style: italic;
 }
 
 .clear-delete {
   background-color: var(--clear-delete-bg-color);
-  font-weight: 550;
+  font-weight: 300;
   border: 5px solid #d44949;
-  box-shadow: 0 0 6px 0.5px #d44949;
+  box-shadow: 0 0 6px 0px #d44949;
 }
 
 .button-number {
@@ -154,13 +155,3 @@ footer {
     line-height: 50px;
   }
 }
-
-
-
-
-
-
-
-
-
-
